@@ -18,7 +18,7 @@ function Home() {
 
   const todosprodutos = products.flatMap((prod) => prod.itens);
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col items-center justify-center">
       <Header />
       <section className="w-full flex flex-wrap justify-between gap-1">
         <div className="flex flex-wrap justify-between gap-3">

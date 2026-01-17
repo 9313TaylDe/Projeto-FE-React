@@ -2,7 +2,7 @@ import "./App.css";
 import AppRoutes from "./routes/AppRoutes";
 function App() {
   return (
-    <div className="">
+    <div className="p-1 flex items-center justify-center">
       <AppRoutes />
     </div>
   );

@@ -16,9 +16,9 @@ const Header = () => {
   const { cart, clearCart } = useContext(CartContext);
   return (
     <header
-      className={`transition-all duration-[2000ms] ${
+      className={`shadow-[0_0_15px_4px] rounded-md shadow-black transition-all duration-[2000ms] ${
         dark ? "bg-[#0f172a]" : "bg-[#fff]"
-      } h-[70px] flex w-full p-1 pr-3 pl-3 text-center items-center relative justify-between`}
+      } h-[70px] flex w-[98.5%] p-1 pr-3 pl-3 text-center items-center relative justify-between`}
     >
       <div className="text-black relative  z-50 w-[9%] ">
         <button
@@ -30,12 +30,12 @@ const Header = () => {
 
         <ul
           className={`
-      w-[100%] z-50 b-black dark:bg-[#0f172a] duration-[2s]  absolute top-0
+      w-[100%] z-50 bg-black dark:bg-[#0f172a] duration-[1s]  absolute top-1
       transition-all  ease-in-out h-[300px] border
       ${
         openMenu
-          ? "-translate-x-3.5 p-4 opacity-100"
-          : "-translate-x-44 opacity-0"
+          ? "-translate-x-[28px] p-4 opacity-100 top-1"
+          : "-translate-x-44 opacity-0 top-1 duration-1000 transition-all"
       }
     `}
         >
