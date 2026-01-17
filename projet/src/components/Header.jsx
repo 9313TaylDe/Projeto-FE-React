@@ -20,17 +20,17 @@ const Header = () => {
         dark ? "bg-[#0f172a]" : "bg-[#fff]"
       } h-[70px] flex w-[98.5%] p-1 pr-3 pl-3 text-center items-center relative justify-between`}
     >
-      <div className="text-black relative  z-50 w-[9%] ">
+      <div className="text-black relative  z-50 w-[11%] ">
         <button
-          className="w-full text-black dark:text-white transition-all duration-700"
+          className="w-full text-2xl text-black dark:text-white transition-all duration-700"
           onClick={() => setopenmenu(!openMenu)}
         >
           Menu
         </button>
 
         <ul
-          className={`
-      w-[100%] z-50 bg-black dark:bg-[#0f172a] duration-[1s]  absolute top-1
+          className={`flex flex-col justify-start items-start rounded-r-lg
+      w-[100%] z-50  bg-[#0f172a] dark:bg-[#eee] duration-[1s]  absolute top-1
       transition-all  ease-in-out h-[300px] border
       ${
         openMenu
@@ -39,35 +39,35 @@ const Header = () => {
       }
     `}
         >
-          <h2 className="mb-3 border-b border-b-black dark:border-b-white  text-black dark:text-white">
+          <h2 className="mb-3 border-b border-b-black dark:border-b-white  text-white  dark:text-black">
             Menu
           </h2>
           <li
-            className="hover:bg-gray-500 text-black dark:text-white"
+            className="hover:bg-gray-500 text-white dark:text-black w-full flex text-left"
             onClick={() => setopenmenu(false)}
           >
             Camisas
           </li>
           <li
-            className="hover:bg-gray-500 text-black dark:text-white"
+            className="hover:bg-gray-500 text-white dark:text-black  w-full flex text-left"
             onClick={() => setopenmenu(false)}
           >
             Fones
           </li>
           <li
-            className="hover:bg-gray-500 text-black dark:text-white"
+            className="hover:bg-gray-500 text-white dark:text-black  w-full flex text-left"
             onClick={() => setopenmenu(false)}
           >
             Carregadores
           </li>
           <li
-            className="hover:bg-gray-500 text-black dark:text-white"
+            className="hover:bg-gray-500 text-white dark:text-black  w-full flex text-left"
             onClick={() => setopenmenu(false)}
           >
             Películas
           </li>
           <li
-            className="hover:bg-gray-500 text-black dark:text-white"
+            className="hover:bg-gray-500 text-white dark:text-black  w-full flex text-left"
             onClick={() => setopenmenu(false)}
           >
             Cabos
@@ -75,15 +75,18 @@ const Header = () => {
         </ul>
       </div>
 
-      <nav className="flex w-[50%] h-full items-center justify-between">
-        <div className="flex w-[50%] h-full">
-          <button className="pi pi-power-off" onClick={Logout}></button>
+      <nav className="flex w-[40%] h-full items-center justify-between">
+        <div className="flex w-[50%] h-full gap-4">
           <button
-            className={`${dark ? "text-white" : "text-black"}`}
+            className={`text-2xl ${
+              dark ? "text-white   pi pi-sun" : "text-black pi pi-moon"
+            }`}
             onClick={() => setdark(!dark)}
-          >
-            {dark ? "Light" : "Sun"}
-          </button>
+          ></button>
+          <button
+            className="pi pi-power-off text-2xl text-black dark:text-white"
+            onClick={Logout}
+          ></button>
         </div>
         <i className="pi pi-user text-3xl  hover:text-gray-600 cursor-pointer text-black dark:text-white transition-all duration-700"></i>
         <i className="h-fit  flex p-1">

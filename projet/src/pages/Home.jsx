@@ -7,6 +7,7 @@ import Login from "./Login_Page";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 function Home() {
   const navigate = useNavigate();
   const { user, Logout } = useContext(AuthContext);
@@ -25,8 +26,8 @@ function Home() {
           <ProductCard products={todosprodutos} />
         </div>
 
-        <Cart />
       </section>
+        <Footer />
     </div>
   );
 }

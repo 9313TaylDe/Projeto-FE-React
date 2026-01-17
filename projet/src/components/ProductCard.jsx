@@ -91,8 +91,8 @@ export function ProductCard({ products = [] }) {
           />
         );
       })}
-      <div className="flex w-full justify-center items-center gap-5 ">
-        {expandiu && (
+      <div className="flex w-full justify-center items-center gap-5">
+        {expandiu ? (
           <>
             {LIMITE_INICIAL < products.length && (
               <button
@@ -109,13 +109,12 @@ export function ProductCard({ products = [] }) {
               Ver menos
             </button>
           </>
-        )}
-        {!expandiu && (
+        ) : (
           <button
             className="text-black dark:text-white hover:bg-black dark:hover:bg-white rounded-xl hover:text-white dark:hover:text-black p-2"
             onClick={verMais}
           >
-            Ver mais
+            Ver maiss
           </button>
         )}
       </div>
