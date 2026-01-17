@@ -1,41 +1,60 @@
-# 📌 Projeto FE React
+# 🚀 Projeto Front-End React --- E-commerce Base
 
-Aplicação Front-End construída em React utilizando Vite e Tailwind CSS.\
-Projeto moderno, rápido, organizado e totalmente escalável.
+Aplicação Front-End desenvolvida em **React + Vite**, com foco em
+desempenho, responsividade, componentização e autenticação.\
+O projeto simula a base de um **e-commerce**, incluindo login, rotas
+privadas, exibição de produtos e página de detalhes.
 
-## 📖 Sobre o Projeto
+## 📌 Funcionalidades do Projeto
 
-Este repositório contém o front-end de um projeto desenvolvido com foco
-em performance, componentização, responsividade e boas práticas de
-desenvolvimento.
+### 🔐 Autenticação
 
-## ✨ Funcionalidades
+-   Login funcional
+-   Context API para gerenciamento global de autenticação
+-   Rotas privadas e públicas protegidas
 
--   Configuração completa com React + Vite\
--   Tailwind CSS configurado\
--   Dark Mode via `class`\
--   Estrutura organizada para componentes\
--   Ambiente rápido e otimizado
+### 🧭 Sistema de Rotas
+
+-   Página Home protegida
+-   Redirecionamento automático baseado no estado do usuário
+-   Página dinâmica `/product-detalhes/:id`
+
+### 🎨 Estilo e UI
+
+-   Tailwind CSS configurado
+-   Dark Mode ativado
+-   Layout totalmente responsivo
+
+### ⚡ Performance
+
+-   Vite como bundler
+-   Build rápida e otimizada
+-   Estrutura escalável
 
 ## 🧪 Tecnologias Utilizadas
 
--   React\
--   Vite\
--   TailwindCSS\
--   PostCSS\
--   Autoprefixer
+-   React
+-   Vite
+-   TailwindCSS
+-   React Router DOM
+-   Context API
+-   PostCSS
 
-## 📁 Estrutura do Projeto
+## 📁 Estrutura
 
-projet/ ├── public/ ├── src/ │ ├── assets/ │ ├── components/ │ ├──
-App.jsx │ └── main.jsx ├── index.html ├── package.json ├──
-postcss.config.js ├── tailwind.config.js └── README.md
+projet/ ├── src/ │ ├── components/ │ ├── context/ │ ├── pages/ │ ├──
+routes/ │ ├── App.jsx │ └── main.jsx ├── tailwind.config.js ├──
+postcss.config.js └── README.md
 
 ## ⚙️ Instalação
 
-git clone https://github.com/9313TaylDe/Projeto-FE-React.git cd
-Projeto-FE-React/projet npm install npm run dev
+``` bash
+git clone https://github.com/9313TaylDe/Projeto-FE-React.git
+cd Projeto-FE-React/projet
+npm install
+npm run dev
+```
 
 ## 👤 Autor
 
-TaylDe --- GitHub: https://github.com/9313TaylDe
+TaylDe --- https://github.com/9313TaylDe
