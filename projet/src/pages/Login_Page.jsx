@@ -47,7 +47,10 @@ const Login_Page = () => {
 
               <button
                 className="bg-red-600 mt-5 rounded-lg hover:bg-red-500 cursor-pointer"
-                onClick={() => Login(email, senha)}
+                onClick={() => {
+                  Login(email, senha);
+                  alert(`Bem-Vindo sr(a) ${nome}`);
+                }}
               >
                 Entrar
               </button>
@@ -83,17 +86,17 @@ const Login_Page = () => {
 
               <input
                 className="placeholder:text-black text-black pl-2 cursor-pointer rounded-lg focus:bg-[#F7DEC9]"
-                type="password"
-                placeholder="Senha"
-                value={senha}
-                onChange={(e) => setsenha(e.target.value)}
-              />
-              <input
-                className="placeholder:text-black text-black pl-2 cursor-pointer rounded-lg focus:bg-[#F7DEC9]"
                 type="text"
                 placeholder="Nome"
                 value={nome}
                 onChange={(e) => setnome(e.target.value)}
+              />
+              <input
+                className="placeholder:text-black text-black pl-2 cursor-pointer rounded-lg focus:bg-[#F7DEC9]"
+                type="password"
+                placeholder="Senha"
+                value={senha}
+                onChange={(e) => setsenha(e.target.value)}
               />
 
               <button
