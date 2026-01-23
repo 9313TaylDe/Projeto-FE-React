@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 export const AuthContext = createContext();
 
 function AuthProvider({ children }) {
+  const [email, setemail] = useState("");
+  const [senha, setsenha] = useState("");
+
   const [user, setuser] = useState(null);
   const navigate = useNavigate();
 
@@ -14,21 +17,19 @@ function AuthProvider({ children }) {
     }
   }, []);
 
-  const Login = (email, senha) => {
-    if (!email || !senha) {
-      alert("Preencha todos os campos");
-      return;
-    }
+  const LoginUser = async (email, senha) => {
+    const response = await fetch("http://127.0.0.1:5000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, senha }),
+    });
 
+    const dados = await response.json();
+    setuser(dados);
     const saved = JSON.parse(localStorage.getItem("saved"));
 
-    if (saved && saved.email === email && saved.senha === senha) {
-      setuser(saved);
-      localStorage.setItem("user", JSON.stringify(saved));
-      navigate("/");
-    } else {
-      alert("Usuário ou senha inválidos");
-    }
+    localStorage.setItem("user", JSON.stringify(dados));
+    navigate("/");
   };
 
   const Logout = () => {
@@ -37,23 +38,22 @@ function AuthProvider({ children }) {
     navigate("/login");
   };
 
-  const NewAccount = (email, nome, senha) => {
-    if (!email || !nome || !senha) {
-      alert("Preencha todos os campos");
-      return;
-    }
+  const NewAccount = async (email, nome, password) => {
+    const response = await fetch("http://127.0.0.1:5000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nome, email, senha: password }),
+    });
 
-    const data = { email, nome, senha };
-
-    alert("Conta criada com sucesso!");
-
+    const data = await response.json();
+    setuser(data);
     localStorage.setItem("saved", JSON.stringify(data));
-
+    alert("Conta cadastrada co sucesso");
     navigate("/login"); // volta para login
   };
 
   return (
-    <AuthContext.Provider value={{ user, Login, Logout, NewAccount }}>
+    <AuthContext.Provider value={{ user, LoginUser, Logout, NewAccount }}>
       {children}
     </AuthContext.Provider>
   );

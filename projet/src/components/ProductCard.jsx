@@ -1,123 +1,159 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import Product_Img from "./Product_Img";
-import Card from "./Product_CardId";
-import products from "../services/products";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-export function ProductCard({ products = [] }) {
-  const { cart, addProduct, removeProduct, validId } = useContext(CartContext);
-  // quantidade inicial de cards visíveis
+export function ProductCard({
+  products = [],
+  largura,
+  altura,
+  detalhes = false,
+}) {
+  const { cart, addProduct, removeProduct } = useContext(CartContext);
   const LIMITE_INICIAL = 12;
+  const navigate = useNavigate();
 
   const [quantidadeVisivel, setQuantidadeVisivel] = useState(LIMITE_INICIAL);
-  const [expandiu, setexpandiu] = useState(0);
+  const [expandiu, setexpandiu] = useState(false);
 
   const verMais = () => {
     setexpandiu(true);
     setQuantidadeVisivel((prev) => Math.min(prev + 12, products.length));
   };
+
   const verMenos = () => {
     setQuantidadeVisivel((prev) => {
       const novoValor = Math.max(prev - 12, LIMITE_INICIAL);
-      if (novoValor === LIMITE_INICIAL) {
-        setexpandiu(false);
-      }
+      if (novoValor === LIMITE_INICIAL) setexpandiu(false);
       return novoValor;
     });
   };
 
   return (
-    <div className="flex w-full flex-wrap gap-3 p-2 justify-between items-center  ">
+    <div
+      style={{ width: largura, height: altura }}
+      className={`${
+        detalhes
+          ? "flex h-fit w-[50%] items-center p-1 gap-2 border border-black"
+          : "flex w-full flex-wrap gap-3 p-2 justify-between items-center"
+      }`}
+    >
       {products.slice(0, quantidadeVisivel).map((produto) => {
         const ja_no_carrinho = cart.some((prod) => prod.id === produto.id);
 
         return (
-          <Card
+          <div
             key={produto.id}
-            className="h-[340px]  w-[200px] hover:translate-y-1 hover:shadow-2xl shadow-2xl shadow-black dark:hover:shadow-white dark:shadow-slate-400 bg-white  dark:bg-black rounded-t-xl transition-all duration-[2000ms]"
-            fret={
-              <div className="flex flex-col p-1 h-full justify-between items-center">
-                <div className=" rounded-lg w-full h-fit items-center flex justify-center">
-                  <Product_Img
-                    classname="h-[240px]  w-[200px] dark:invert object-cover transition-all duration-[2000ms]"
-                    images={<img src={produto.img} />}
-                  />
-                </div>
+            className={`${
+              detalhes
+                ? "w-full h-fit flex flex-col items-center text-center border border-black"
+                : "flex flex-col"
+            }`}
+          >
+            <Link to={`/product-detalhes/${produto.id}`}>Detalhes</Link>
+            {/* IMAGEM */}
+            <div className="rounded-lg flex justify-center items-center">
+              <Product_Img
+                classname={`${
+                  detalhes
+                    ? "w-full h-full"
+                    : "h-[240px] w-[200px] object-cover"
+                } dark:invert transition-all duration-[1200ms]`}
+                images={<img src={produto.img} />}
+              />
+            </div>
 
-                <div className="hover:text-gray-500  flex-col  w-[100%] h-[90px] text-[21px] flex items-center justify-start ">
-                  <p className="text-[13px] text-black dark:text-white w-full flex transition-all duration-[1900ms]">
-                    {produto.title}
-                  </p>
-                  <p className="text-[18px] w-full text-black dark:text-white font-semibold transition-all duration-[1900ms]">
-                    <i className="text-[12px]">R$</i>
-                    {produto.preco}
-                  </p>
-                </div>
-                {!ja_no_carrinho ? (
+            <div
+              className={`${
+                detalhes
+                  ? "flex w-full justify-between items-center flex-col m-4"
+                  : ""
+              }`}
+            >
+              {/* TÍTULO */}
+              <div
+                className={`${
+                  detalhes ? "flex w-[50%] gap-2 items-center" : ""
+                }`}
+              >
+                {" "}
+                <p
+                  className={`${
+                    detalhes ? "text-xl  " : "text-[13px] mt-3"
+                  } text-black dark:text-white`}
+                >
+                  R${produto.title}
+                </p>
+                {/* PREÇO */}
+                <p
+                  className={`${
+                    detalhes ? "text-[29px] font-bold underline" : "text-[18px]"
+                  } text-black dark:text-white`}
+                >
+                  <i className={`${detalhes ? "text-" : "text-[12px]"}`}>R$</i>
+                  {produto.preco}
+                </p>
+              </div>
+              {!ja_no_carrinho ? (
+                <button
+                  className={`pi pi-plus bg-green-600 p-3 rounded-md ${
+                    detalhes ? "w-[200px] text-lg" : "w-[30%]"
+                  } hover:bg-green-800 mt-3`}
+                  onClick={() => addProduct(produto)}
+                ></button>
+              ) : (
+                <div
+                  className={`flex items-center justify-center gap-2 mt-3 ${
+                    detalhes ? "w-[200px]" : "w-full"
+                  }`}
+                >
                   <button
-                    className="pi pi-plus bg-green-600 p-2 rounded-md w-[30%] hover:bg-green-800"
+                    className="pi pi-plus bg-green-600 p-3 rounded-md w-[50%] hover:bg-green-800"
                     onClick={() => addProduct(produto)}
                   ></button>
-                ) : (
-                  <div className="w-full flex items-center justify-center gap-2">
-                    <button
-                      className="pi pi-plus bg-green-600 p-2 rounded-md w-[30%] hover:bg-green-800"
-                      onClick={() => addProduct(produto)}
-                    ></button>
-                    <button
-                      onClick={() => removeProduct(produto)}
-                      className="pi pi-minus p-2 bg-red-600 rounded-md w-[30%] hover:bg-red-800"
-                    ></button>
-                  </div>
-                )}
-              </div>
-            }
-            vers={(() => {
-              return (
-                <div>
-                  <div className={`flex flex-wrap gap-2 w-full h-full z-50`}>
-                    <Product_Img
-                      classname="h-[283px]  w-[200px] dark:invert object-cover transition-all duration-[2000ms]"
-                      images={<img src={produto.img} />}
-                    />
-                  </div>
-                  <Link to={`/product-detalhes/${produto.id}`}>
-                    Ver todos os detalhes
-                  </Link>
+                  <button
+                    onClick={() => removeProduct(produto)}
+                    className="pi pi-minus p-3 bg-red-600 rounded-md w-[50%] hover:bg-red-800"
+                  ></button>
                 </div>
-              );
-            })()}
-          />
+              )}
+            </div>
+
+            {/* BOTÕES */}
+          </div>
         );
       })}
-      <div className="flex w-full justify-center items-center gap-5">
-        {expandiu ? (
-          <>
-            {LIMITE_INICIAL < products.length && (
+
+      {/* BOTÕES VER MAIS / VER MENOS (somente lista normal) */}
+      {!detalhes && (
+        <div className="flex w-full justify-center items-center gap-5">
+          {expandiu ? (
+            <>
+              {LIMITE_INICIAL < products.length && (
+                <button
+                  className="text-black dark:text-white hover:bg-black dark:hover:bg-white rounded-xl hover:text-white dark:hover:text-black p-2"
+                  onClick={verMais}
+                >
+                  Ver mais
+                </button>
+              )}
               <button
                 className="text-black dark:text-white hover:bg-black dark:hover:bg-white rounded-xl hover:text-white dark:hover:text-black p-2"
-                onClick={verMais}
+                onClick={verMenos}
               >
-                Ver mais
+                Ver menos
               </button>
-            )}
+            </>
+          ) : (
             <button
               className="text-black dark:text-white hover:bg-black dark:hover:bg-white rounded-xl hover:text-white dark:hover:text-black p-2"
-              onClick={verMenos}
+              onClick={verMais}
             >
-              Ver menos
+              Ver mais
             </button>
-          </>
-        ) : (
-          <button
-            className="text-black dark:text-white hover:bg-black dark:hover:bg-white rounded-xl hover:text-white dark:hover:text-black p-2"
-            onClick={verMais}
-          >
-            Ver maiss
-          </button>
-        )}
-      </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

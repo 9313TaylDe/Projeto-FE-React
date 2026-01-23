@@ -3,7 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Login_Page = () => {
-  const { user, Login, NewAccount } = useContext(AuthContext);
+  const { user, LoginUser, NewAccount } = useContext(AuthContext);
   const [email, setemail] = useState("");
   const [senha, setsenha] = useState("");
   const [nome, setnome] = useState("");
@@ -48,7 +48,7 @@ const Login_Page = () => {
               <button
                 className="bg-red-600 mt-5 rounded-lg hover:bg-red-500 cursor-pointer"
                 onClick={() => {
-                  Login(email, senha);
+                  LoginUser(email, senha);
                   alert(`Bem-Vindo sr(a) ${nome}`);
                 }}
               >

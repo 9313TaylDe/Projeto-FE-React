@@ -2,7 +2,7 @@ import Login_Page from "../pages/Login_Page";
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import { Cart } from "../pages/Cart";
-import Product_Page_Show from "../components/Product_Page_Show";
+import Product_Page_Show from "../pages/Products_Details";
 import RoutesProtected from "./RoutesProtected";
 function AppRoutes() {
   return (
