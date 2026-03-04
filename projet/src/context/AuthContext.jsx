@@ -17,40 +17,55 @@ function AuthProvider({ children }) {
     }
   }, []);
 
-  const LoginUser = async (email, senha) => {
+const LoginUser = async (email, senha) => {
+  try {
     const response = await fetch("https://backend-1-jdsc.onrender.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, senha }),
+      body: JSON.stringify({ email, password: senha }),
     });
+
+    if (!response.ok) {
+      alert("Email ou senha inválidos");
+      return;
+    }
 
     const dados = await response.json();
+
     setuser(dados);
-    const saved = JSON.parse(localStorage.getItem("saved"));
-
     localStorage.setItem("user", JSON.stringify(dados));
+
     navigate("/");
-  };
+  } catch (error) {
+    alert("Erro ao conectar ao servidor");
+  }
+};
 
-  const Logout = () => {
-    localStorage.removeItem("user");
-    setuser(null);
-    navigate("/login");
-  };
-
+const Logout = () => {
+  localStorage.removeItem("user");
+  setuser(null);
+  navigate("/login");
+};
   const NewAccount = async (email, nome, password) => {
-    const response = await fetch("https://backend-1-jdsc.onrender.com/login", {
+  try {
+    const response = await fetch("https://backend-1-jdsc.onrender.com/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nome, email, senha: password }),
+      body: JSON.stringify({ nome, email, password }),
     });
 
-    const data = await response.json();
-    setuser(data);
-    localStorage.setItem("saved", JSON.stringify(data));
-    alert("Conta cadastrada co sucesso");
-    navigate("/login"); // volta para login
-  };
+    if (!response.ok) {
+      alert("Erro ao cadastrar");
+      return;
+    }
+
+    alert("Conta criada com sucesso!");
+    navigate("/login");
+
+  } catch (error) {
+    alert("Erro ao conectar ao servidor");
+  }
+};
 
   return (
     <AuthContext.Provider value={{ user, LoginUser, Logout, NewAccount }}>
