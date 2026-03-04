@@ -18,7 +18,7 @@ function AuthProvider({ children }) {
   }, []);
 
   const LoginUser = async (email, senha) => {
-    const response = await fetch("http://127.0.0.1:5000/login", {
+    const response = await fetch("https://backend-1-jdsc.onrender.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, senha }),
@@ -39,7 +39,7 @@ function AuthProvider({ children }) {
   };
 
   const NewAccount = async (email, nome, password) => {
-    const response = await fetch("http://127.0.0.1:5000/login", {
+    const response = await fetch("https://backend-1-jdsc.onrender.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nome, email, senha: password }),
